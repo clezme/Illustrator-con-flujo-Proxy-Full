@@ -1,0 +1,269 @@
+:root {
+  color-scheme: light dark;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  --bg: #1f1f1f;
+  --panel: #2b2b2b;
+  --accent: #0068ff;
+  --accent-hover: #1f80ff;
+  --text: #f5f5f5;
+  --muted: #9aa0a6;
+  --border: #3a3a3a;
+  --success: #00c853;
+  --error: #ff5252;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+}
+
+#app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: var(--panel);
+}
+
+header {
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+h1 {
+  margin: 0;
+  font-size: 20px;
+}
+
+.subtitle {
+  margin: 4px 0 0;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+main {
+  padding: 16px 20px 80px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.controls {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  margin-bottom: 20px;
+}
+
+.mode-selector {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  padding: 8px 12px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+}
+
+.mode-selector label {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 12px;
+}
+
+.field.inline {
+  justify-content: flex-end;
+}
+
+.field input[type="text"] {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 6px 8px;
+  color: var(--text);
+}
+
+.path-picker {
+  display: flex;
+  gap: 6px;
+}
+
+.path-picker button {
+  flex-shrink: 0;
+}
+
+button {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text);
+  border: 1px solid transparent;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  transition: background 0.2s ease, border 0.2s ease;
+}
+
+button.primary {
+  background: var(--accent);
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+button:hover:not(:disabled) {
+  background: var(--accent-hover);
+}
+
+.actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.status {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.counters span {
+  margin-right: 12px;
+}
+
+.table-wrapper {
+  max-height: 320px;
+  overflow: auto;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+
+thead {
+  background: rgba(255, 255, 255, 0.08);
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+td,
+th {
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--border);
+}
+
+tr.placeholder td {
+  text-align: center;
+  color: var(--muted);
+}
+
+#spinner {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.6);
+  gap: 12px;
+  font-size: 14px;
+}
+
+.spinner {
+  width: 32px;
+  height: 32px;
+  border: 4px solid rgba(255, 255, 255, 0.2);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 0.9s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+#toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.9);
+  padding: 10px 16px;
+  border-radius: 6px;
+  font-size: 13px;
+  color: var(--text);
+  min-width: 200px;
+  text-align: center;
+}
+
+.toast-success {
+  border: 1px solid var(--success);
+}
+
+.toast-error {
+  border: 1px solid var(--error);
+}
+
+.status-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-weight: 600;
+}
+
+.status-chip.proxy {
+  background: rgba(255, 171, 64, 0.2);
+  color: #ffab40;
+}
+
+.status-chip.hires {
+  background: rgba(0, 200, 83, 0.2);
+  color: var(--success);
+}
+
+.status-chip.unknown {
+  background: rgba(158, 158, 158, 0.2);
+  color: var(--muted);
+}
+
+.action-chip.relink {
+  color: var(--success);
+}
+
+.action-chip.keep {
+  color: var(--muted);
+}
+
+.action-chip.fail {
+  color: var(--error);
+}
+
+.log-link a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.log-link a:hover {
+  text-decoration: underline;
+}
