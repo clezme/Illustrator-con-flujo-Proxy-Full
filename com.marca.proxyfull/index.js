@@ -195,12 +195,11 @@ async function requestRelink() {
 }
 
 function requestFolderSelection() {
-  window.cep.fs.selectFolder(false, "Seleccioná la carpeta raíz").then((result) => {
-    if (result.err === 0 && result.data && result.data.length) {
-      selectors.rootPath().value = result.data[0];
-      selectors.rootPath().dataset.value = result.data[0];
-    }
-  });
+  const result = window.cep.fs.selectFolder(false, "Seleccioná la carpeta raíz");
+  if (result && result.err === 0 && result.data && result.data.length) {
+    selectors.rootPath().value = result.data[0];
+    selectors.rootPath().dataset.value = result.data[0];
+  }
 }
 
 function openLatestLog(event) {
