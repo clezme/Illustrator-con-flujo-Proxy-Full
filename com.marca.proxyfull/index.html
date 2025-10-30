@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Proxy → Full</title>
+    <link rel="stylesheet" href="index.css" />
+    <script type="text/javascript" src="lib/CSInterface.js"></script>
+    <script type="module" src="index.js" defer></script>
+  </head>
+  <body>
+    <div id="app">
+      <header>
+        <h1>Proxy → Full</h1>
+        <p class="subtitle">Flujo inteligente de vínculos para Adobe Illustrator</p>
+      </header>
+      <main>
+        <section class="controls">
+          <fieldset class="mode-selector">
+            <legend>Modo</legend>
+            <label><input type="radio" name="mode" value="folder" checked /> Carpeta</label>
+            <label><input type="radio" name="mode" value="suffix" /> Sufijo</label>
+            <label><input type="radio" name="mode" value="mixed" /> Mixto</label>
+          </fieldset>
+          <div class="field">
+            <label for="rootPath">Carpeta raíz del documento</label>
+            <div class="path-picker">
+              <input type="text" id="rootPath" placeholder="Seleccioná carpeta..." readonly />
+              <button id="selectRoot" type="button">Seleccionar…</button>
+            </div>
+          </div>
+          <div class="field inline">
+            <label><input type="checkbox" id="includeSubfolders" checked /> Incluir subcarpetas</label>
+          </div>
+          <div class="field">
+            <label for="proxySuffix">Sufijo proxy</label>
+            <input type="text" id="proxySuffix" value="_proxy" />
+          </div>
+          <div class="field">
+            <label for="hiresSuffix">Sufijo hires</label>
+            <input type="text" id="hiresSuffix" value="_hires" />
+          </div>
+          <div class="actions">
+            <button id="analyze" type="button">Analizar DRY RUN</button>
+            <button id="relink" type="button" class="primary">Relink real</button>
+          </div>
+        </section>
+        <section class="status">
+          <div class="counters">
+            <span id="count-total">Vínculos: 0</span>
+            <span id="count-relocated">Relinkeados: 0</span>
+            <span id="count-failed">Fallidos: 0</span>
+            <span id="count-skipped">Omitidos: 0</span>
+          </div>
+          <div class="log-link">
+            <a id="openLog" href="#" rel="noopener">Abrir log más reciente</a>
+          </div>
+        </section>
+        <section class="results">
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>Nombre</th>
+                  <th>Estado actual</th>
+                  <th>Destino</th>
+                  <th>Acción</th>
+                  <th>Mensaje</th>
+                </tr>
+              </thead>
+              <tbody id="resultsBody">
+                <tr class="placeholder">
+                  <td colspan="5">Ejecutá un análisis para ver resultados…</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </main>
+      <div id="spinner" hidden>
+        <div class="spinner"></div>
+        <p>Procesando vínculos…</p>
+      </div>
+      <div id="toast" hidden></div>
+    </div>
+  </body>
+</html>

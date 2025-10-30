@@ -1,0 +1,13 @@
+{
+  "name": "proxy-full-illustrator",
+  "version": "1.0.0",
+  "description": "Panel CEP Proxy → Full para Adobe Illustrator",
+  "type": "module",
+  "scripts": {
+    "dev": "node ./com.marca.proxyfull/scripts/dev.mjs --watch",
+    "build": "node ./com.marca.proxyfull/scripts/build.mjs --zip"
+  },
+  "keywords": ["illustrator", "cep", "proxy", "hires"],
+  "author": "",
+  "license": "MIT"
+}
