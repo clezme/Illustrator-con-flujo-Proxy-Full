@@ -194,8 +194,8 @@ async function requestRelink() {
   }
 }
 
-function requestFolderSelection() {
-  const result = window.cep.fs.selectFolder(false, "Seleccioná la carpeta raíz");
+async function requestFolderSelection() {
+  const result = await window.cep.fs.selectFolder(false, "Seleccioná la carpeta raíz");
   if (result && result.err === 0 && result.data && result.data.length) {
     selectors.rootPath().value = result.data[0];
     selectors.rootPath().dataset.value = result.data[0];
