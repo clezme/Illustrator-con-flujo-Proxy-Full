@@ -224,6 +224,7 @@ async function requestFolderSelection() {
     selectors.rootPath().value = selected;
     selectors.rootPath().dataset.value = selected;
   } catch (err) {
+    showToast(err.message || "No se pudo seleccionar la carpeta.", "error");
     showToast("No se pudo seleccionar la carpeta.", "error");
 function requestFolderSelection() {
   const result = window.cep.fs.selectFolder(false, "Seleccioná la carpeta raíz");
