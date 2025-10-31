@@ -51,6 +51,17 @@
     var hasUncPrefix = path.indexOf("\\\\") === 0;
     var working = hasUncPrefix ? path.replace(/^\\\\/, "") : path;
     var result = working.replace(/\\/g, "/");
+    var decoded = path.replace(/%20/g, " ");
+    var hasUncPrefix =
+      decoded.indexOf("\\\\") === 0 || decoded.indexOf("//") === 0;
+    var result = decoded.replace(/\\/g, "/");
+    if (hasUncPrefix) {
+      while (result.charAt(0) === "/") {
+        result = result.substring(1);
+      }
+      result = "//" + result;
+    }
+    var result = path.replace(/\\+/g, "/");
     result = result.replace(/%20/g, " ");
     if (hasUncPrefix) {
       var trimmed = result.replace(new RegExp("^/+"), "");
