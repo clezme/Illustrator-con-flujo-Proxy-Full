@@ -48,10 +48,11 @@
     if (!path || path === "") {
       return "";
     }
-    var result = path.replace(/\\/g, "/");
-    var result = path.replace(/\\+/g, "/");
-    result = result.replace(/%20/g, " ");
-    return result;
+    var uncPrefix = path.indexOf("\\\\") === 0 ? "\\\\" : "";
+    var remainder = uncPrefix ? path.substring(2) : path;
+    remainder = remainder.replace(/\\/g, "/");
+    remainder = remainder.replace(/%20/g, " ");
+    return uncPrefix + remainder;
   }
 
   function toUnixPath(fileObj) {
