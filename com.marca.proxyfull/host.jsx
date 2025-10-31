@@ -48,8 +48,16 @@
     if (!path || path === "") {
       return "";
     }
-    var result = path.replace(/\/g, "/");
-    result = result.replace(/%20/g, " ");
+    var decoded = path.replace(/%20/g, " ");
+    var hasUncPrefix =
+      decoded.indexOf("\\\\") === 0 || decoded.indexOf("//") === 0;
+    var result = decoded.replace(/\\/g, "/");
+    if (hasUncPrefix) {
+      while (result.charAt(0) === "/") {
+        result = result.substring(1);
+      }
+      result = "//" + result;
+    }
     return result;
   }
 
