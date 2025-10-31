@@ -194,12 +194,18 @@ async function requestRelink() {
   }
 }
 
-async function requestFolderSelection() {
-  const result = await window.cep.fs.selectFolder(false, "Seleccioná la carpeta raíz");
-  if (result && result.err === 0 && result.data && result.data.length) {
-    selectors.rootPath().value = result.data[0];
-    selectors.rootPath().dataset.value = result.data[0];
+function requestFolderSelection() {
+  const result = window.cep.fs.selectFolder(false, "Seleccioná la carpeta raíz");
+  if (!result || result.err !== 0) {
+    return;
   }
+  const paths = Array.isArray(result.data) ? result.data : [];
+  const selected = paths.length ? paths[0] : "";
+  if (!selected) {
+    return;
+  }
+  selectors.rootPath().value = selected;
+  selectors.rootPath().dataset.value = selected;
 }
 
 function openLatestLog(event) {

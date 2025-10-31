@@ -48,7 +48,7 @@
     if (!path || path === "") {
       return "";
     }
-    var result = path.replace(/\/g, "/");
+    var result = path.replace(/\\/g, "/");
     result = result.replace(/%20/g, " ");
     return result;
   }
