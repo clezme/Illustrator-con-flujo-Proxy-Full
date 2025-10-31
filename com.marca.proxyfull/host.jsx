@@ -48,8 +48,13 @@
     if (!path || path === "") {
       return "";
     }
-    var result = path.replace(/\/g, "/");
+    var hasUncPrefix = path.indexOf("\\\\") === 0;
+    var working = hasUncPrefix ? path.replace(/^\\\\+/, "") : path;
+    var result = working.replace(/\\/g, "/");
     result = result.replace(/%20/g, " ");
+    if (hasUncPrefix) {
+      result = "//" + result.replace(/^\/+/, "");
+    }
     return result;
   }
 
