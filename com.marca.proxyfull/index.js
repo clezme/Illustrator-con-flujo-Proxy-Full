@@ -196,10 +196,10 @@ async function requestRelink() {
 
 async function requestFolderSelection() {
   try {
-    let result = window.cep.fs.selectFolder(false, "Seleccioná la carpeta raíz");
-    if (result && typeof result.then === "function") {
-      result = await result;
-    }
+    const result = await window.cep.fs.selectFolder(
+      false,
+      "Seleccioná la carpeta raíz"
+    );
     if (!result || result.err !== 0) {
       return;
     }
@@ -212,7 +212,18 @@ async function requestFolderSelection() {
     selectors.rootPath().dataset.value = selected;
   } catch (err) {
     showToast("No se pudo seleccionar la carpeta.", "error");
+function requestFolderSelection() {
+  const result = window.cep.fs.selectFolder(false, "Seleccioná la carpeta raíz");
+  if (!result || result.err !== 0) {
+    return;
   }
+  const paths = Array.isArray(result.data) ? result.data : [];
+  const selected = paths.length ? paths[0] : "";
+  if (!selected) {
+    return;
+  }
+  selectors.rootPath().value = selected;
+  selectors.rootPath().dataset.value = selected;
 }
 
 function openLatestLog(event) {
